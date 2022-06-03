@@ -11,6 +11,7 @@ function reverseDNS () {
 }
 function kuberinstall () {
 swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -24,6 +25,10 @@ echo "now install container d "
 sleep 2
 apt install containerd
 kubeadm config images pull
+echo 1 > /proc/sys/net/ipv4/ip_forward
+modprobe br_netfilter
+modprobe --first-time bridge
+
 }
 echo " Wellcome to Install K8S "
 echo -n " do you need to K8S? (please enter yes or no) : "
