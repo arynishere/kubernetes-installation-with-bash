@@ -5,3 +5,4 @@ and in addition, the network in the cluster has been set up with flannel.
 bash k8s.sh 
 or 
 chmod +x k8s.sh
+// bash k8s.sh
